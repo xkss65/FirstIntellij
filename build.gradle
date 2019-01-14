@@ -1,0 +1,41 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
+//	FOR HOME USAGE ONLY
+//	repositories {
+//		mavenCentral()
+//	}
+	FOR ABN AMRO USAGE ONLY
+    repositories {
+        maven { url "https://p-nexus.nl.eu.abnamro.com:8443/nexus/content/repositories/COM-JCENTRAL-proxy/" }
+        maven { url "https://p-nexus.nl.eu.abnamro.com:8443/nexus/content/groups/OSC-releases-virtual/" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+repositories {
+    //needed because of spring-ims-connect
+    maven { url "https://p-nexus.nl.eu.abnamro.com:8443/nexus/content/repositories/XBI-releases/" }
+    maven { url "https://p-nexus.nl.eu.abnamro.com:8443/nexus/content/repositories/COM-JCENTRAL-proxy/" }
+    maven { url "https://p-nexus.nl.eu.abnamro.com:8443/nexus/content/groups/OSC-releases-virtual/" }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.abnamro'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
